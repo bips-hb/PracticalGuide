@@ -7,10 +7,10 @@ In this guide, we present how to perform constraint-based causal discovery using
 The pdf can be downloaded from arXiv: www.arxiv.org/abs/2108.13395.
 
 ### ... download the code
-The R code included in the guide is in the file RCode.R.
+The file `RCode.R` contains all the code required to reproduce the analyses performed in the guide.
 
 ### ... download the source files
-The guide was created using R Markdown. You can reprode the pdf by following these steps:
+The guide was created using R Markdown. You can reproduce the pdf by following these steps:
 1) Download all files in this repository into a single folder.
 2) Make sure that the R packages rmarkdown, pcalg, bnlearn, mice, tpc and micd are installed. Note that in order to install tpc and micd, you need to have Rtools40 installed on your computer.
 ```R
