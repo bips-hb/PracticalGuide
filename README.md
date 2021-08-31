@@ -21,4 +21,5 @@ install.packages("mice")
 devtools::install_github("bips-hb/tpc")
 devtools::install_github("bips-hb/micd")
 ```
-3) Open Practical_guide_31Aug2021.Rmd in RStudio and press "knit".
+3) Open Practical_guide_31Aug2021.Rmd in RStudio and click "Knit".
+![imagedescription](C:/Users/witte/Pictures/Screenshots/Knit.png)
