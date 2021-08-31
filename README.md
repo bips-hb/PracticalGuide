@@ -22,4 +22,4 @@ devtools::install_github("bips-hb/tpc")
 devtools::install_github("bips-hb/micd")
 ```
 3) Open Practical_guide_31Aug2021.Rmd in RStudio and click "Knit".
-![imagedescription](https://github.com/bips-hb/PractialGuide/blob/Screenshot.jpg?raw=true)
+![imagedescription](https://github.com/bips-hb/PractialGuide/blob/Knit.jpg?raw=true)
