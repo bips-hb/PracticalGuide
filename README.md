@@ -9,8 +9,8 @@ The pdf can be downloaded from arXiv: www.arxiv.org/abs/2108.13395.
 The R code included in the guide is in the file RCode.R.
 
 ## Download the source file
-The guide was created using R Markdown. You can reprode the guide by following these steps:
-1) download all files in this repository into a single folder.
+The guide was created using R Markdown. You can reprode the pdf by following these steps:
+1) Download all files in this repository into a single folder.
 2) Make sure that the R packages rmarkdown, pcalg, bnlearn, mice, tpc and micd are installed. Note that in order to install tpc and micd, you need to have Rtools40 installed on your computer.
 ```R
 install.packages("rmarkdown")
@@ -20,4 +20,4 @@ install.packages("mice")
 devtools::install_github("bips-hb/tpc")
 devtools::install_github("bips-hb/micd")
 ```
-3) Open Practical_guide_31Aug2021.Rmd in RStudio and press knit.
+3) Open Practical_guide_31Aug2021.Rmd in RStudio and press "knit".
