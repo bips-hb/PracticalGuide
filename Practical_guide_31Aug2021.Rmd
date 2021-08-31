@@ -20,7 +20,7 @@ output:
 natbiboptions: authoryear
 biblio-style: apalike
 bibliography: DFGbibtex.bib
-header-includes:
+header- = s:
 - \usepackage{fancyhdr}
 - \pagestyle{fancy}
 - \fancyhead[L]{ANDREWS ET AL.}
@@ -141,20 +141,20 @@ knitr::include_graphics('Data_Search.png')
 Then, the user can double click on the "Data" icon, and select *File* $\rightarrow$ *Load* to load the data into TETRAD. This brings up another GUI that allows for the specification of various data features, like missing data markers, as shown in Figure \@ref(fig:tetrad-data-features).
 
 ```{r tetrad-data-features, echo = FALSE, fig.cap = 'Specifying various data features, including missing data markers.'}
-knitr::include_graphics('Data_input.png')
+knitr::include_graphics('Data_Input.png')
 ```
 
 The user must validate the data with TETRAD before it is loaded. During the validation process, TETRAD checks for potential issues, like accidentally including a bookkeeping row (e.g., the variable names) as a data observation or not correctly labeling missing data values. If issues are found, TETRAD will display the row number(s) and issue(s) found so they can be corrected. After all validation checks are passed, the data can be loaded and search can be performed.
 
 ```{r tetrad-search-algs, echo = FALSE, fig.cap = 'Selecting a search algorithm in TETRAD.'}
-knitr::include_graphics('Search_algorithms-v6-9.png')
+knitr::include_graphics('Search_Algorithms.png')
 ```
 
 
 When setting up a causal search, the first thing that must be done after clicking on the "Search" icon is selecting the search algorithm, see Figure \@ref(fig:tetrad-search-algs). Here, we tell TETRAD that we want to use the PC algorithm. In addition, we specify the conditional independence test to be used. The options to choose from depend on the measurement scales of the data; in Figure \@ref(fig:tetrad-search-algs), the options for a dataset containing both numeric and discrete variables are shown. After choosing the algorithm, users can further specify options related to how the search should be performed, including how conflicts between edges are handled, maximal conditioning sets, p-value thresholds, and bootstrapping options, see Figure \@ref(fig:tetrad-search-options). <!--- Choosing \texttt{Collider discovery: 2=Conservative (CPC) or 3=Max-P} together with \texttt{Collider conflicts: 2=Orient bidirected} and \texttt{Yes if the 'stable' FAS should be done} produces an order-independent output. --->
 
 ```{r tetrad-search-options, echo = FALSE, fig.cap = 'Specifying various options related to the causal search.'}
-knitr::include_graphics('Search_algorithms_options-v6-9.png')
+knitr::include_graphics('Search_Options.png')
 ```
 
 More information on all options can be obtained by hovering the mouse over text in the "Search" box or by consulting the manual at www.github.com/cmu-phil/tetrad.
@@ -196,7 +196,7 @@ From the list of all IDEFICS/I.Family variables, we chose two baseline character
 \@ref(fig:causal-dag) as the \textit{true} DAG, as it is the model generating the data used for illustration.
 
 ```{r causal-dag, echo = FALSE, fig.cap = "Assumed causal mechanisms and associations in the simulated data."}
-knitr::include_graphics('TrueDAG_cohortsim_fto.eps')
+knitr::include_graphics('TrueDAG.pdf')
 ```
 
 We equipped the true DAG with a joint distribution by specifying how each variable \(X\) is generated given the values of its parents. For multinomial \(X\), we assumed a multinomial distribution; for continuous \(X\), a main effects linear regression; for ordered categorical \(X\), a main effects ordered logistic model; for count data \(X\), a main effects Poisson model. In order to have realistic coefficients, we estimated them from the IDEFICS/I.Family data. Using this data-generating process, we generated 5000 artificial observations (dataset \texttt{dat\_cohort} in the \texttt{tpc} package). We compared the marginal distributions of all variables to those in the real data and found that the means and standard deviations were similar. The \texttt{tpc} package also contains a dataset \texttt{dat\_cohort\_dis} where the continuous data have been discretized, and a datasets \texttt{dat\_miss} with missing values. All three datasets will be used as examples in this guide. A causal discovery analysis using the real IDEFICS data is performed in @Foraitaetal2021.
@@ -324,7 +324,7 @@ The output is shown in Figure \@ref(fig:bn-learn-mixed). Compared to Figure 6, o
 Two tests for mixed data are currently implemented in TETRAD: the Conditional Gaussian test by @AndrewsRamseyCooper2018 and the Degenerate Gaussian test by @AndrewsRamseyCooper2019, where categorical variables are internally converted into dummy variables and then treated as continuous. Figure \@ref(fig:tetrad-search-algs) shows the "Search" box where the selection is made. The output of TETRAD using the Conditional Gaussian test and all the settings shown in Figure \@ref(fig:tetrad-search-options) is in Figure \@ref(fig:tetrad-mixed). 
 
 ```{r tetrad-mixed, echo = FALSE, out.width = "100%", fig.cap = 'Output of the conditional Gaussian test with cross-sectional mixed data in TETRAD'}
-knitr::include_graphics('T0_cross_section_mixed_data_search-24August2021.png')
+knitr::include_graphics('Output_Mixed.png')
 ```
 
 Alternatively, data can be discretized or converted to a numeric scale by inserting a second "Data" box between the first "Data" box and the "Search" box, and choosing "Discretize Dataset" or "Convert Numerical Discrete To Continuous", respectively (screenshots not shown).
@@ -389,14 +389,14 @@ graphviz.plot(bnlearn_fit, shape = "ellipse")
 ### TETRAD
 
 ```{r tetrad-knowledge, echo = FALSE, fig.cap = "Adding a \"Knowledge\" box in TETRAD."}
-knitr::include_graphics('Tetrad_Tier_node_setup.png')
+knitr::include_graphics('Knowledge.png')
 ```
 
 In TETRAD, users can ensure correct temporal ordering by adding a "Knowledge" box to the causal search pipeline, see Figure \@ref(fig:tetrad-knowledge). This is equivalent to specifying the tiers in \texttt{tpc}.
 "Knowledge" boxes also allow users to specify required and forbidden edges between variables, much like the white and black lists of ```bnlearn```.
 
 ```{r tetrad-tiers, echo = FALSE, out.width = "100%", fig.cap = "TETRAD allows users to specify tiers, just like \\texttt{bnlearn} and \\texttt{tpc}."}
-knitr::include_graphics('TierInput_v4.png')
+knitr::include_graphics('Tiers_Setup.png')
 ```
 
 Even though our data has three time points, we will illustrate the steps needed in TETRAD using only the first two time points. Sorting variables into tiers is a straightforward process -- one need only click on a variable in the "Not in Tier" box, and drag it to the appropriate Tier, see Figure \@ref(fig:tetrad-tiers). If desired, there are additional options for each tier, like specifying that there are no causal relationships between variables within a tier ("Forbid Within Tier") or that variables within a particular tier can only have causal relationships with variables in the next tier ("Can Cause Only Next Tier"). 
@@ -404,7 +404,7 @@ Even though our data has three time points, we will illustrate the steps needed 
 In our data, we believe that country and sex influence every other variable. To tell TETRAD this information, we use a "required" group, see Figure \@ref(fig:tetrad-required). Just like in the prior analyses with ```tpc``` and ```bnlearn```, we also specify that the variables \texttt{age\_t0} and \texttt{age\_t1} have edges into all other variables in their respective tiers, but not outside of them, and that country, sex, and the age variables do not influence each other (screenshots not shown).
 
 ```{r tetrad-required, echo = FALSE, out.width = "100%", fig.cap = "TETRAD also allows for forbidden and required relationships to be specified. This is similar to the \\texttt{context.all} and \\texttt{context.tier} arguments of \\texttt{tpc()} and the \\texttt{blacklist} and \\texttt{whitelist} arguments of \\texttt{pc.stable()}."}
-knitr::include_graphics('ForbiddenRequired_v3.png')
+knitr::include_graphics('Required.png')
 ```
 
 It turns out that without these knowledge-based specifications, TETRAD will not produce any output as it struggles to perform all of the required conditional independence tests. With two time points and 24 variables, we found that TETRAD took approximately 24-36 hours to complete the search. Users with many variables and/or time points could experience substantial run times, and this should be factored into any analysis plans. 
@@ -412,7 +412,7 @@ It turns out that without these knowledge-based specifications, TETRAD will not 
 Figure \@ref(fig:tetrad-timeordered-output) is the output of our search. Overall, TETRAD returned many edges between variables; however, we also note that not all of the required edges are found in the graph (e.g., there is no edge between \texttt{age\_t0} and \texttt{fiber\_t0} even though we required it). This is a known issue with TETRAD, and the developers are actively addressing it. In the meantime, we advise users of TETRAD to review all output carefully to ensure it matches what was expected given one's background knowledge.
 
 ```{r tetrad-timeordered-output, echo = FALSE, out.width = "100%", fig.cap = "TETRAD output after specifying a time ordering between variables using tiers, required groups, and forbidden groups."}
-knitr::include_graphics('tetrad-tiers-2timepoints.png')
+knitr::include_graphics('Output_Tiers.png')
 ```
 
 ## Missing data
@@ -498,12 +498,12 @@ As \texttt{bnlearn}, TETRAD performs test-wise deletion by default if the data i
 
 
 ```{r search-algorithm-missing-warning, echo = FALSE, out.width = "80%", fig.cap = "TETRAD warns users that test-wise deletion will be used when the data have missing values"}
-knitr::include_graphics('search-algorithm-missing-warning.png')
+knitr::include_graphics('Algorithms_Miss.png')
 ```
 
 
 ```{r tetrad-missing, echo = FALSE, out.width = "100%", fig.cap = "Output of TETRAD when the input data has missing values. TETRAD performs test-wise deletion."}
-knitr::include_graphics('missing-data-results-tpc.png')
+knitr::include_graphics('Output_Miss.png')
 ```
 
 
